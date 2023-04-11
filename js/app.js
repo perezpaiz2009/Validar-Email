@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
             delete email.cc;
             //remover evento blur de inputcc
             inputcc.removeEventListener('blur', validar);
+            alerta.remove();
         }
 
     });
