@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const email = {
         email: '',
-        cc: '',
         asunto: '',
         mensaje: ''
     }
@@ -44,11 +43,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputcc.classList.contains('hidden')) {
             inputcc.classList.remove('hidden');
             inputcc.addEventListener('blur', validar);
+            email.cc = '';
 
         } else {
 
             inputcc.classList.add('hidden');
-            limpiarAlerta();
+            delete email.cc;
+            //remover evento blur de inputcc
+            inputcc.removeEventListener('blur', validar);
         }
 
     });
@@ -157,9 +159,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function resetFormulario() {
         //limpiando objeto
+
+        if (inputcc.classList.contains('hidden')) {
+            email.asunto = '';
+            email.email = '';
+            email.mensaje = '';
+            formulario.reset();
+            comprobarEmail();
+            return;
+        }
+
+        email.cc = '';
         email.asunto = '';
         email.email = '';
-        email.cc = '';
         email.mensaje = '';
         formulario.reset();
         comprobarEmail();
